@@ -1,0 +1,8 @@
+<Solution>
+    <Folder Name="/src/">
+        <Project Path="src/Disconance.Models/Disconance.Models.csproj"/>
+    </Folder>
+    <Folder Name="/tests/">
+        <Project Path="tests/Disconance.Models.Tests/Disconance.Models.Tests.csproj"/>
+    </Folder>
+</Solution>

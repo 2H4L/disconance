@@ -25,6 +25,17 @@ Disconance is a .NET framework for Discord bots. The current library, `Disconanc
 - Keep network clients, dependency injection, serialization implementations, endpoint request classes, pagination envelopes, access-token exchanges, rate-limit objects, Gateway event envelopes, opcodes, connection handling, dispatch logic, and voice connection protocol messages outside this library.
 - SDK-specific, RPC-specific, and undocumented objects are outside this library's scope.
 
+## Unit tests
+
+- Mirror production folders and namespace suffixes under the test project. For example, `src/Disconance.Models/Channels/Channel.cs` maps to `tests/Disconance.Models.Tests/Channels/TestChannel.cs` with namespace `Disconance.Models.Tests.Channels`.
+- Name test files and classes `Test[ClassName]`, omitting generic type parameters (for example, `TestOptional`). Keep each test class focused on one production type.
+- Identify one system under test (SUT) per test; name the instance `sut` where applicable. Test its observable public behavior rather than implementation details.
+- Follow Arrange-Act-Assert: prepare inputs and the SUT, perform one operation, then verify the outcome. Separate phases with blank lines; comments are optional. Exception assertions may wrap the Act. Multiple assertions are fine when they describe one outcome.
+- Name methods `Member_Scenario_ExpectedBehavior`. Use theories for different inputs exercising the same behavior.
+- For new behavior and bug fixes, use red-green-refactor: write a focused test, run it and confirm it fails for the intended reason, implement the smallest correct change, then refactor with tests passing. Do not change correct production code just to manufacture a failing test when reorganizing existing tests.
+- Test meaningful logic and edge cases, such as optional presence and snowflake parsing. Avoid tests of automatic getters/setters, compiler-enforced type relationships, or framework behavior; do not add tests merely to cover every POCO.
+- Keep tests deterministic, independent, and free of network or external services. Restore any ambient state changed by a test, such as culture.
+
 ## Organization and validation
 
 - Match namespaces to Discord resource organization and folders to namespaces; generally keep each resource type in its own file.
