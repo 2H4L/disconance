@@ -46,3 +46,10 @@ Disconance is a .NET framework for Discord bots. The current library, `Disconanc
   dotnet build Disconance.slnx --configuration Release
   dotnet test Disconance.slnx --configuration Release
   ```
+
+## NuGet packaging
+
+- Package metadata lives in `src/Disconance.Models/Disconance.Models.csproj`. Keep prerelease versions until a stable release is intended; override the version for a release with `-p:Version=<version>`.
+- After building and testing, run `dotnet pack Disconance.slnx --configuration Release --no-build`. Packages and `.snupkg` symbols are written to `artifacts/packages/`; the test project is not packable.
+- The package includes the repository's MIT license and XML API documentation. Keep its description consistent with the library's scope.
+- Verify package metadata and contents before publishing; never commit feed credentials or API keys.

@@ -7,6 +7,23 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <Description>Transport-independent models for the Discord API.</Description>
+        <IsPackable>true</IsPackable>
+        <PackageId>Disconance.Models</PackageId>
+        <Authors>2H4L Software</Authors>
+        <Copyright>Copyright (c) 2026 2H4L Software</Copyright>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/2H4L/disconance</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/2H4L/disconance</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Version>0.1.0-alpha.1</Version>
+        <PackageTags>discord;models;disconance</PackageTags>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageOutputPath>$(MSBuildThisFileDirectory)../../artifacts/packages</PackageOutputPath>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="../../LICENSE" Pack="true" PackagePath="/"/>
+    </ItemGroup>
 
 </Project>

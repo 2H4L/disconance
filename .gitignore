@@ -3,6 +3,7 @@
 **/obj/
 .vs/
 TestResults/
+artifacts/
 
 # JetBrains Rider
 # Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
