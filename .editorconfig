@@ -1,0 +1,12 @@
+root = true
+
+[*.cs]
+# Require braces for these control-flow statements.
+resharper_csharp_braces_for_for = required
+resharper_csharp_braces_for_foreach = required
+resharper_csharp_braces_for_ifelse = required
+resharper_csharp_braces_for_while = required
+
+# Keep one blank line around single-line properties.
+resharper_csharp_blank_lines_around_single_line_auto_property = 1
+resharper_csharp_blank_lines_around_single_line_property = 1
