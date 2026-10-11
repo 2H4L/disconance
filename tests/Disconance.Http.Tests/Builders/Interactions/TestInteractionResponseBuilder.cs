@@ -10,9 +10,9 @@ public class TestInteractionResponseBuilder
     public void Build_NestedModal_ComposesDisplayConfiguration()
     {
         var sut = new InteractionResponseBuilder().WithModal(modal => modal
-            .WithCustomId("delivery").WithTitle("Delivery details")
-            .AddLabel(label => label.WithLabel("Instructions").WithComponentTextInput(input => input
-                .WithCustomId("instructions").WithStyle(TextInputStyle.Paragraph))));
+            .WithCustomId("feedback").WithTitle("Feedback")
+            .AddLabel(label => label.WithLabel("Comments").WithComponentTextInput(input => input
+                .WithCustomId("comments").WithStyle(TextInputStyle.Paragraph))));
 
         var result = sut.Build();
 

@@ -16,7 +16,7 @@ public class TestChannelScope
         var sut = sender.Channel(42);
 
         await sut.Messages.Create().WithContent("Hello")
-            .AddEmbed(embed => embed.WithTitle("Truck").AddField(field => field.WithName("status").WithValue("ready")))
+            .AddEmbed(embed => embed.WithTitle("Status").AddField(field => field.WithName("status").WithValue("ready")))
             .SendAsync();
 
         var payload = Assert.IsType<CreateMessageBody>(sender.Request!.Body);
