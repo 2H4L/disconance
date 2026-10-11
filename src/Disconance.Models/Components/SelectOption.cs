@@ -11,7 +11,9 @@ public class SelectOption
     /// <summary>
     ///     User-facing name of the option; max 100 characters.
     /// </summary>
-    /// <remarks>Discord field: <c>label</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>label</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/components/reference#string-select-select-option-structure" />
     public required string Label { get; set; }
@@ -19,7 +21,9 @@ public class SelectOption
     /// <summary>
     ///     Dev-defined value of the option; max 100 characters.
     /// </summary>
-    /// <remarks>Discord field: <c>value</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>value</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/components/reference#string-select-select-option-structure" />
     public required string Value { get; set; }
@@ -27,7 +31,9 @@ public class SelectOption
     /// <summary>
     ///     Additional description of the option; max 100 characters.
     /// </summary>
-    /// <remarks>Discord field: <c>description</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>description</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/components/reference#string-select-select-option-structure" />
     public Optional<string> Description { get; set; }
@@ -35,7 +41,9 @@ public class SelectOption
     /// <summary>
     ///     <c>id</c> , <c>name</c> , and <c>animated</c> .
     /// </summary>
-    /// <remarks>Discord field: <c>emoji</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>emoji</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/components/reference#string-select-select-option-structure" />
     public Optional<PartialEmoji> Emoji { get; set; }
@@ -43,7 +51,9 @@ public class SelectOption
     /// <summary>
     ///     Will show this option as selected by default.
     /// </summary>
-    /// <remarks>Discord field: <c>default</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>default</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/components/reference#string-select-select-option-structure" />
     public Optional<bool> Default { get; set; }

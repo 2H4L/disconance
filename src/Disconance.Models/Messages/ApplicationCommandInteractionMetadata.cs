@@ -17,7 +17,9 @@ public class ApplicationCommandInteractionMetadata : MessageInteractionMetadata
     /// <summary>
     ///     The user the command was run on, present only on user command interactions.
     /// </summary>
-    /// <remarks>Discord field: <c>target_user</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>target_user</c>. May be omitted.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/resources/message#message-interaction-metadata-object" />
     /// <seealso href="https://docs.discord.com/developers/interactions/application-commands#user-commands" />
     public Optional<User> TargetUser { get; set; }
@@ -27,7 +29,9 @@ public class ApplicationCommandInteractionMetadata : MessageInteractionMetadata
     ///     response message will also have <c>message_reference</c> and <c>referenced_message</c> pointing to this
     ///     message.
     /// </summary>
-    /// <remarks>Discord field: <c>target_message_id</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>target_message_id</c>. May be omitted.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/resources/message#message-interaction-metadata-object" />
     /// <seealso href="https://docs.discord.com/developers/interactions/application-commands#message-commands" />
     public Optional<Snowflake> TargetMessageId { get; set; }

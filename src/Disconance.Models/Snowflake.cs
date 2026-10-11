@@ -6,7 +6,7 @@ namespace Disconance.Models;
 ///     A Discord identifier preserving the full unsigned 64-bit range.
 /// </summary>
 /// <remarks>
-///     Wire formats normally encode snowflakes as decimal strings. Serialization belongs to the consuming transport.
+///     Wire formats normally encode snowflakes as decimal strings. Use the shared DiscordJson configuration.
 /// </remarks>
 /// <seealso href="https://docs.discord.com/developers/reference#snowflakes" />
 public readonly record struct Snowflake(ulong Value) : IComparable<Snowflake>
@@ -32,8 +32,12 @@ public readonly record struct Snowflake(ulong Value) : IComparable<Snowflake>
     /// <summary>
     ///     Parses an unsigned decimal identifier without signs or whitespace.
     /// </summary>
-    /// <exception cref="FormatException">The text is not an unsigned decimal identifier.</exception>
-    /// <exception cref="OverflowException">The number exceeds the unsigned 64-bit range.</exception>
+    /// <exception cref="FormatException">
+    ///     The text is not an unsigned decimal identifier.
+    /// </exception>
+    /// <exception cref="OverflowException">
+    ///     The number exceeds the unsigned 64-bit range.
+    /// </exception>
     public static Snowflake Parse(string value)
     {
         return new Snowflake(ulong.Parse(value, NumberStyles.None, CultureInfo.InvariantCulture));

@@ -16,7 +16,9 @@ public class MessageComponentInteractionMetadata : MessageInteractionMetadata
     /// <summary>
     ///     ID of the message that contained the interactive component.
     /// </summary>
-    /// <remarks>Discord field: <c>interacted_message_id</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>interacted_message_id</c>.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/resources/message#message-interaction-metadata-object" />
     public required Snowflake InteractedMessageId { get; set; }
 }

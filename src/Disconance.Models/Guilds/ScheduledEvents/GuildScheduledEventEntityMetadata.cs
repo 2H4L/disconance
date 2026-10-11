@@ -9,7 +9,9 @@ public class GuildScheduledEventEntityMetadata
     /// <summary>
     ///     Location of the event (1-100 characters).
     /// </summary>
-    /// <remarks>Discord field: <c>location</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>location</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/guild-scheduled-event#guild-scheduled-event-object" />
     public Optional<string> Location { get; set; }

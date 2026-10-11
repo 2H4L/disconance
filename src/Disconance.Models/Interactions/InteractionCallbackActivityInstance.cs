@@ -9,7 +9,9 @@ public class InteractionCallbackActivityInstance
     /// <summary>
     ///     Instance ID of the Activity if one was launched or joined.
     /// </summary>
-    /// <remarks>Discord field: <c>id</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>id</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-callback" />
     public required string Id { get; set; }

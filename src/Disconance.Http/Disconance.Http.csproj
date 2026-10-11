@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <Description>Discord HTTP requests, rate limiting, uploads, and extensible fluent request and model composition builders.</Description>
+        <IsPackable>true</IsPackable>
+        <PackageId>Disconance.Http</PackageId>
+        <Authors>2H4L Software</Authors>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/2H4L/disconance</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/2H4L/disconance</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Version>0.1.0-alpha.1</Version>
+        <PackageTags>discord;http;disconance</PackageTags>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageOutputPath>$(MSBuildThisFileDirectory)../../artifacts/packages</PackageOutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.0"/>
+        <InternalsVisibleTo Include="Disconance.Http.Tests"/>
+        <ProjectReference Include="../Disconance.Models/Disconance.Models.csproj"/>
+        <None Include="../../LICENSE" Pack="true" PackagePath="/"/>
+    </ItemGroup>
+</Project>

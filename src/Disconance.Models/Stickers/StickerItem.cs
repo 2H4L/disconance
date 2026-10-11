@@ -9,7 +9,9 @@ public class StickerItem
     /// <summary>
     ///     Id of the sticker.
     /// </summary>
-    /// <remarks>Discord field: <c>id</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>id</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/sticker#sticker-item-object-sticker-item-structure" />
     public required Snowflake Id { get; set; }
@@ -17,7 +19,9 @@ public class StickerItem
     /// <summary>
     ///     Name of the sticker.
     /// </summary>
-    /// <remarks>Discord field: <c>name</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>name</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/sticker#sticker-item-object-sticker-item-structure" />
     public required string Name { get; set; }
@@ -25,7 +29,9 @@ public class StickerItem
     /// <summary>
     ///     Type of sticker format.
     /// </summary>
-    /// <remarks>Discord field: <c>format_type</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>format_type</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/sticker#sticker-item-object-sticker-item-structure" />
     public required StickerFormatType FormatType { get; set; }

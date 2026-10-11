@@ -1,6 +1,6 @@
 # Project notes
 
-Disconance is a .NET framework for Discord bots. The current library, `Disconance.Models`, targets .NET 10 and has no NuGet dependencies.
+Disconance is a .NET framework for Discord bots. `Disconance.Models` and `Disconance.Http` target .NET 10. Models has no runtime NuGet dependencies; HTTP references Models and Microsoft.Extensions.Options for options and dependency injection integration.
 
 ## Model conventions
 
@@ -20,10 +20,23 @@ Disconance is a .NET framework for Discord bots. The current library, `Disconanc
 
 ## Boundary with future libraries
 
-- Keep `Disconance.Models` transport-independent. Serialization belongs in a future layer responsible for Discord field names, optional omission, snowflake and permission string encodings, null markers, and polymorphic dispatch. Default JSON serialization is unsupported.
+- Keep `Disconance.Models` independent of HTTP transport. Shared System.Text.Json configuration lives in `Disconance.Models.Serialization`; use `DiscordJson.CreateOptions()` for Discord field names, optional omission, snowflake and permission encodings, null markers, and polymorphic dispatch. Unconfigured JSON serialization is unsupported.
+- Keep POCOs mutable and attribute-free. Composition builders and their snapshot helpers belong in HTTP, alongside the rest of the fluent API.
 - Include shared data structures such as interaction responses, poll definitions, voice states, and activities.
-- Keep network clients, dependency injection, serialization implementations, endpoint request classes, pagination envelopes, access-token exchanges, rate-limit objects, Gateway event envelopes, opcodes, connection handling, dispatch logic, and voice connection protocol messages outside this library.
+- Keep network clients, dependency injection, endpoint request classes, pagination envelopes, access-token exchanges, rate-limit objects, Gateway event envelopes, opcodes, connection handling, dispatch logic, and voice connection protocol messages outside Models.
 - SDK-specific, RPC-specific, and undocumented objects are outside this library's scope.
+
+## HTTP conventions
+
+- Keep `Disconance.Http` usable without hosting or Interactions. Interactions always depends on HTTP and Models; neither depends on Interactions.
+- All builders live in `Disconance.Http.Builders`, including nested model composition, request builders, shared contracts, and snapshot helpers. Builders check required values and structural conflicts and produce independent snapshots.
+- Expose explicit typed requests through `IDiscordRequest<T>` and send through `IDiscordRequestSender`. Keep routes, query parameters, authentication, uploads, and payloads separate. Do not infer requests from reflected properties or register per-endpoint handlers.
+- General Discord API POCOs and reusable composition definitions, including `ApplicationCommandDefinition`, belong in Models. Endpoint requests and bodies specific to create/edit operations belong in HTTP. A model's use as a request payload alone does not make it HTTP-specific. Reuse shared composition models instead of serializing returned resources as request bodies.
+- Fluent scopes are extensions on the sender. Request builders are created through fluent scopes with a required sender and internal constructors; expose `Build()` and one `SendAsync(CancellationToken)` method. Model composition builders expose `Build()`. `With` replaces, `Add` appends, `Omit` restores absence, and explicit null clears nullable fields.
+- Keep the MVP API focused: do not add alternate sender overloads, duplicate payload `Configure` wrappers, unsupported endpoint helpers, or public implementation utilities. Extend request handling through `IDiscordRequestSender` implementations and decorators.
+- Expose only `DiscordHttpClient(DiscordHttpOptions)` publicly. The client owns and configures its transport; handler and clock substitution are internal test seams.
+- Provide application setup through `AddDisconanceHttp` with an options callback. Register `IDiscordRequestSender` as a singleton without replacing existing implementations; consumers extend behavior through implementations and decorators. Snapshot configured options when creating the client.
+- Reuse one HTTP client per credential. Coordinate learned rate-limit buckets independently; retry only 429 responses, with fresh content and streams per attempt. Keep tests deterministic using fake handlers and controlled time.
 
 ## Unit tests
 
@@ -38,8 +51,12 @@ Disconance is a .NET framework for Discord bots. The current library, `Disconanc
 
 ## Organization and validation
 
+- Use C# extension blocks for extension members, grouping members by receiver type. Do not introduce `this`-parameter extension methods.
 - Match namespaces to Discord resource organization and folders to namespaces; generally keep each resource type in its own file.
+- Use `System.Threading.Lock` for fields used exclusively with `lock` statements.
+- Separate multi-line statements in method bodies from adjacent statements with blank lines, including wrapped assignments and calls. Keep leading comments attached to their statement. Do not add blank lines immediately inside braces or separate connected `if`/`else` and `try`/`catch`/`finally` clauses solely for this rule.
 - Document public models and fields with XML documentation, including Discord field names and anchored source references. Missing XML documentation and other build warnings are treated as errors.
+- Use multi-line XML documentation for text-bearing elements such as `summary`, `remarks`, `param`, `typeparam`, `returns`, and `exception`: put opening and closing tags on separate lines and indent the text four spaces after `/// `. Keep self-closing elements such as `inheritdoc` and `seealso` compact.
 - Build and test code changes with:
 
   ```sh
@@ -49,7 +66,7 @@ Disconance is a .NET framework for Discord bots. The current library, `Disconanc
 
 ## NuGet packaging
 
-- Package metadata lives in `src/Disconance.Models/Disconance.Models.csproj`. Keep prerelease versions until a stable release is intended; override the version for a release with `-p:Version=<version>`.
+- Package metadata lives in each library's project file. Keep prerelease versions until a stable release is intended; override the version for a release with `-p:Version=<version>`.
 - After building and testing, run `dotnet pack Disconance.slnx --configuration Release --no-build`. Packages and `.snupkg` symbols are written to `artifacts/packages/`; the test project is not packable.
 - The package includes the repository's MIT license and XML API documentation. Keep its description consistent with the library's scope.
 - Verify package metadata and contents before publishing; never commit feed credentials or API keys.

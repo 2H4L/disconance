@@ -11,7 +11,9 @@ public class PollMedia
     /// <summary>
     ///     The text of the field.
     /// </summary>
-    /// <remarks>Discord field: <c>text</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>text</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/poll#poll-media-object-poll-media-object-structure" />
     public Optional<string> Text { get; set; }
@@ -19,7 +21,9 @@ public class PollMedia
     /// <summary>
     ///     The emoji of the field.
     /// </summary>
-    /// <remarks>Discord field: <c>emoji</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>emoji</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/poll#poll-media-object-poll-media-object-structure" />
     public Optional<PartialEmoji> Emoji { get; set; }

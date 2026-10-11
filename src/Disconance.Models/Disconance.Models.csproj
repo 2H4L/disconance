@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <Description>Transport-independent models for the Discord API.</Description>
+        <Description>Discord API models and shared System.Text.Json serialization.</Description>
         <IsPackable>true</IsPackable>
         <PackageId>Disconance.Models</PackageId>
         <Authors>2H4L Software</Authors>

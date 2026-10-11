@@ -11,7 +11,9 @@ public class InteractionCallbackResource
     /// <summary>
     ///     Interaction callback type.
     /// </summary>
-    /// <remarks>Discord field: <c>type</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>type</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-callback" />
     public required InteractionCallbackType Type { get; set; }
@@ -19,7 +21,9 @@ public class InteractionCallbackResource
     /// <summary>
     ///     Represents the Activity launched by this interaction.
     /// </summary>
-    /// <remarks>Discord field: <c>activity_instance</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>activity_instance</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-callback" />
     public Optional<InteractionCallbackActivityInstance> ActivityInstance { get; set; }
@@ -27,7 +31,9 @@ public class InteractionCallbackResource
     /// <summary>
     ///     Message created by the interaction.
     /// </summary>
-    /// <remarks>Discord field: <c>message</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>message</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/interactions/receiving-and-responding#interaction-callback" />
     public Optional<Message> Message { get; set; }

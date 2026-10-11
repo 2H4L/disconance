@@ -62,6 +62,7 @@ public class TestSnowflake
     public void ToString_ArabicCulture_ReturnsInvariantDecimal(ulong value, string expected)
     {
         var previous = CultureInfo.CurrentCulture;
+
         try
         {
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ar-SA");

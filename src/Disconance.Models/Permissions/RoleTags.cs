@@ -9,14 +9,18 @@ public class RoleTags
     /// <summary>
     ///     The id of the bot this role belongs to.
     /// </summary>
-    /// <remarks>Discord field: <c>bot_id</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>bot_id</c>. May be omitted.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/topics/permissions#role-object-role-tags-structure" />
     public Optional<Snowflake> BotId { get; set; }
 
     /// <summary>
     ///     The id of the integration this role belongs to.
     /// </summary>
-    /// <remarks>Discord field: <c>integration_id</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>integration_id</c>. May be omitted.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/topics/permissions#role-object-role-tags-structure" />
     public Optional<Snowflake> IntegrationId { get; set; }
 
@@ -33,7 +37,9 @@ public class RoleTags
     /// <summary>
     ///     The id of this role's subscription sku and listing.
     /// </summary>
-    /// <remarks>Discord field: <c>subscription_listing_id</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>subscription_listing_id</c>. May be omitted.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/topics/permissions#role-object-role-tags-structure" />
     public Optional<Snowflake> SubscriptionListingId { get; set; }
 

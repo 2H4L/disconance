@@ -9,11 +9,15 @@ public abstract record MessageNonce;
 /// <summary>
 ///     A textual nonce.
 /// </summary>
-/// <param name="Value">The nonce text.</param>
+/// <param name="Value">
+///     The nonce text.
+/// </param>
 public sealed record StringMessageNonce(string Value) : MessageNonce;
 
 /// <summary>
 ///     An integer nonce.
 /// </summary>
-/// <param name="Value">The nonce number.</param>
+/// <param name="Value">
+///     The nonce number.
+/// </param>
 public sealed record IntegerMessageNonce(long Value) : MessageNonce;

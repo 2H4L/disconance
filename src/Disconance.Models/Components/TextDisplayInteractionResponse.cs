@@ -9,7 +9,9 @@ public class TextDisplayInteractionResponse : ComponentInteractionResponse
     /// <summary>
     ///     <c>10</c> for a Text Display.
     /// </summary>
-    /// <remarks>Discord field: <c>type</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>type</c>.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/components/reference#text-display" />
     public override ComponentType Type => ComponentType.TextDisplay;
 }

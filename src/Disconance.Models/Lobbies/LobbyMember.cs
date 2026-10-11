@@ -9,7 +9,9 @@ public class LobbyMember
     /// <summary>
     ///     The id of the user.
     /// </summary>
-    /// <remarks>Discord field: <c>id</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>id</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/lobby#lobby-member-object-lobby-member-structure" />
     public required Snowflake Id { get; set; }
@@ -17,7 +19,9 @@ public class LobbyMember
     /// <summary>
     ///     Dictionary of string key/value pairs. The max total length is 1000.
     /// </summary>
-    /// <remarks>Discord field: <c>metadata</c>. May be omitted. May be null.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>metadata</c>. May be omitted. May be null.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/lobby#lobby-member-object-lobby-member-structure" />
     public Optional<Dictionary<string, string>?> Metadata { get; set; }
@@ -25,7 +29,9 @@ public class LobbyMember
     /// <summary>
     ///     Lobby member flags combined as a bitfield.
     /// </summary>
-    /// <remarks>Discord field: <c>flags</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>flags</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/lobby#lobby-member-object-lobby-member-structure" />
     /// <seealso href="https://en.wikipedia.org/wiki/Bit_field" />
@@ -36,7 +42,9 @@ public class LobbyMember
     ///     through the HTTP API, not from a Social SDK client. Accessible via the Social SDK with [
     ///     <c>MessageHandle::AdditionalName</c> ].
     /// </summary>
-    /// <remarks>Discord field: <c>additional_name</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>additional_name</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/lobby#lobby-member-object-lobby-member-structure" />
     public Optional<string> AdditionalName { get; set; }

@@ -11,7 +11,9 @@ public class MentionableSelectInteractionResponse : ComponentInteractionResponse
     /// <summary>
     ///     <c>7</c> for a Mentionable Select.
     /// </summary>
-    /// <remarks>Discord field: <c>type</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>type</c>.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/components/reference#mentionable-select" />
     public override ComponentType Type => Components.ComponentType.MentionableSelect;
 
@@ -28,21 +30,27 @@ public class MentionableSelectInteractionResponse : ComponentInteractionResponse
     /// <summary>
     ///     Developer-defined identifier for the input; 1-100 characters.
     /// </summary>
-    /// <remarks>Discord field: <c>custom_id</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>custom_id</c>.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/components/reference#mentionable-select" />
     public required string CustomId { get; set; }
 
     /// <summary>
     ///     Resolved entities from selected options.
     /// </summary>
-    /// <remarks>Discord field: <c>resolved</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>resolved</c>.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/components/reference#mentionable-select" />
     public required ResolvedData Resolved { get; set; }
 
     /// <summary>
     ///     IDs of the selected mentionables.
     /// </summary>
-    /// <remarks>Discord field: <c>values</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>values</c>.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/components/reference#mentionable-select" />
     public required List<Snowflake> Values { get; set; }
 }

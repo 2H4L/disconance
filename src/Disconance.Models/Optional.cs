@@ -3,7 +3,9 @@ namespace Disconance.Models;
 /// <summary>
 ///     A field that can be absent, independently of whether its value can be null.
 /// </summary>
-/// <typeparam name="T">The field value type. Use a nullable type when Discord permits explicit null.</typeparam>
+/// <typeparam name="T">
+///     The field value type. Use a nullable type when Discord permits explicit null.
+/// </typeparam>
 /// <remarks>
 ///     The default value represents an absent field. Assigning a value, including null, marks it present.
 /// </remarks>
@@ -29,7 +31,9 @@ public readonly struct Optional<T>
     /// <summary>
     ///     The present value.
     /// </summary>
-    /// <exception cref="InvalidOperationException">The field is absent.</exception>
+    /// <exception cref="InvalidOperationException">
+    ///     The field is absent.
+    /// </exception>
     public T Value => HasValue ? _value : throw new InvalidOperationException("The field is absent.");
 
     /// <summary>

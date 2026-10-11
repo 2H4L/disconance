@@ -9,7 +9,9 @@ public class DynamicNumberField : DynamicField
     /// <summary>
     ///     <c>2</c> , identifies a number field.
     /// </summary>
-    /// <remarks>Discord field: <c>type</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>type</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/application-identity-profile#dynamic-field-object" />
     public override DynamicFieldType Type => DynamicFieldType.Number;
@@ -17,7 +19,9 @@ public class DynamicNumberField : DynamicField
     /// <summary>
     ///     The numeric value.
     /// </summary>
-    /// <remarks>Discord field: <c>value</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>value</c>.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/application-identity-profile#dynamic-field-object" />
     public required double Value { get; set; }

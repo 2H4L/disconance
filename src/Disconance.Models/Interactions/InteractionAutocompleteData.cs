@@ -12,7 +12,9 @@ public class InteractionAutocompleteData : InteractionResponseData
     /// <summary>
     ///     Autocomplete choices (max of 25 choices).
     /// </summary>
-    /// <remarks>Discord field: <c>choices</c>.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>choices</c>.
+    /// </remarks>
     /// <seealso href="https://docs.discord.com/developers/interactions/receiving-and-responding" />
     public required List<ApplicationCommandOptionChoice> Choices { get; set; }
 }

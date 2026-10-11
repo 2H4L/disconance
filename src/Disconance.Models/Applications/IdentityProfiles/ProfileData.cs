@@ -9,7 +9,9 @@ public class ProfileData
     /// <summary>
     ///     Pre-configured game stat fields.
     /// </summary>
-    /// <remarks>Discord field: <c>primary</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>primary</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/application-identity-profile#profile-data-object" />
     public Optional<PrimaryProfileData> Primary { get; set; }
@@ -17,7 +19,9 @@ public class ProfileData
     /// <summary>
     ///     Custom game stat fields.
     /// </summary>
-    /// <remarks>Discord field: <c>dynamic</c>. May be omitted.</remarks>
+    /// <remarks>
+    ///     Discord field: <c>dynamic</c>. May be omitted.
+    /// </remarks>
     /// <seealso
     ///     href="https://docs.discord.com/developers/resources/application-identity-profile#profile-data-object" />
     public Optional<List<DynamicField>> Dynamic { get; set; }
