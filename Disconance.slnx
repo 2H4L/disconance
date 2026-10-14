@@ -1,10 +1,12 @@
 <Solution>
     <Folder Name="/src/">
         <Project Path="src/Disconance.Http/Disconance.Http.csproj"/>
+        <Project Path="src/Disconance.Interactions/Disconance.Interactions.csproj"/>
         <Project Path="src/Disconance.Models/Disconance.Models.csproj"/>
     </Folder>
     <Folder Name="/tests/">
         <Project Path="tests/Disconance.Http.Tests/Disconance.Http.Tests.csproj"/>
+        <Project Path="tests/Disconance.Interactions.Tests/Disconance.Interactions.Tests.csproj"/>
         <Project Path="tests/Disconance.Models.Tests/Disconance.Models.Tests.csproj"/>
     </Folder>
 </Solution>

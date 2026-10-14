@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <Description>Discord interaction handlers, middleware, command registration, and signed ASP.NET Core interaction endpoints.</Description>
+        <IsPackable>true</IsPackable>
+        <PackageId>Disconance.Interactions</PackageId>
+        <Authors>2H4L Software</Authors>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/2H4L/disconance</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/2H4L/disconance</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <Version>0.1.0-alpha.1</Version>
+        <PackageTags>discord;interactions;aspnetcore;disconance</PackageTags>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageOutputPath>$(MSBuildThisFileDirectory)../../artifacts/packages</PackageOutputPath>
+    </PropertyGroup>
+    <ItemGroup>
+        <FrameworkReference Include="Microsoft.AspNetCore.App"/>
+        <PackageReference Include="NSec.Cryptography" Version="25.4.0"/>
+        <ProjectReference Include="../Disconance.Http/Disconance.Http.csproj"/>
+        <ProjectReference Include="../Disconance.Models/Disconance.Models.csproj"/>
+        <InternalsVisibleTo Include="Disconance.Interactions.Tests"/>
+        <None Include="../../LICENSE" Pack="true" PackagePath="/"/>
+    </ItemGroup>
+</Project>
