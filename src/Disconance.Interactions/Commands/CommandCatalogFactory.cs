@@ -6,15 +6,19 @@ namespace Disconance.Interactions.Commands;
 
 internal sealed class CommandCatalogFactory
 {
-    private readonly Dictionary<(ApplicationCommandType Type, string Name), CommandNode> _roots = [];
     private readonly List<ApplicationCommandDefinition> _definitions = [];
     private readonly Dictionary<Type, CommandNode> _groupNodes = [];
+
+    private readonly List<(SubcommandGroup Group, ApplicationCommandOption Option, CommandNode Node)>
+        _nestedGroups = [];
+
     private readonly List<(ApplicationCommandDefinition Definition, CommandNode Node)> _rootGroups = [];
-    private readonly List<(SubcommandGroup Group, ApplicationCommandOption Option, CommandNode Node)> _nestedGroups = [];
+    private readonly Dictionary<(ApplicationCommandType Type, string Name), CommandNode> _roots = [];
 
     internal (IReadOnlyList<ApplicationCommandDefinition> Definitions,
-        IReadOnlyDictionary<(ApplicationCommandType Type, string Name), CommandNode> Roots) Create(IEnumerable<Command> commands, IEnumerable<CommandGroupBase> groups,
-        IEnumerable<Subcommand> subcommands)
+        IReadOnlyDictionary<(ApplicationCommandType Type, string Name), CommandNode> Roots) Create(
+            IEnumerable<Command> commands, IEnumerable<CommandGroupBase> groups,
+            IEnumerable<Subcommand> subcommands)
     {
         AddCommands(commands);
         AddGroups(groups);
