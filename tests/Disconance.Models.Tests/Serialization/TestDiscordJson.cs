@@ -88,7 +88,7 @@ public class TestDiscordJson
     public void CreateOptions_PermissionAndNullMarker_RoundTrips()
     {
         var sut = DiscordJson.CreateOptions();
-        var permissions = (PermissionFlags)ulong.MaxValue;
+        var permissions = (PermissionFlags) ulong.MaxValue;
 
         var result = JsonSerializer.Serialize(permissions, sut);
         var tags = JsonSerializer.Deserialize<RoleTags>("{\"premium_subscriber\":null}", sut)!;

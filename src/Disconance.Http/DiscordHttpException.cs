@@ -12,7 +12,7 @@ public sealed class DiscordHttpException : HttpRequestException
     ///     Creates an API error from the received status and body.
     /// </summary>
     public DiscordHttpException(HttpStatusCode status, string responseBody) : base(
-        $"Discord API returned HTTP {(int)status}.", null, status)
+        $"Discord API returned HTTP {(int) status}.", null, status)
     {
         ResponseBody = responseBody;
 

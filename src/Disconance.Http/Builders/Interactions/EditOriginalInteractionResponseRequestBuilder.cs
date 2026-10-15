@@ -83,7 +83,7 @@ public sealed class
     /// </summary>
     public EditOriginalInteractionResponseRequestBuilder ClearPoll()
     {
-        return WithPoll((PollDefinition?)null);
+        return WithPoll((PollDefinition?) null);
     }
 
     /// <summary>

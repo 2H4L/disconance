@@ -15,7 +15,7 @@ internal static class ModelSnapshot
     /// </summary>
     public static T Copy<T>(T value)
     {
-        return (T)CopyValue(value, new Dictionary<object, object>(ReferenceEqualityComparer.Instance))!;
+        return (T) CopyValue(value, new Dictionary<object, object>(ReferenceEqualityComparer.Instance))!;
     }
 
     private static object? CopyValue(object? value, Dictionary<object, object> seen)
@@ -40,7 +40,7 @@ internal static class ModelSnapshot
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Optional<>))
         {
-            return (bool)type.GetProperty("HasValue")!.GetValue(value)!
+            return (bool) type.GetProperty("HasValue")!.GetValue(value)!
                 ? Activator.CreateInstance(type, CopyValue(type.GetProperty("Value")!.GetValue(value), seen))
                 : Activator.CreateInstance(type);
         }
@@ -49,6 +49,7 @@ internal static class ModelSnapshot
         {
             var copy = Array.CreateInstance(type.GetElementType()!, array.Length);
             seen[value] = copy;
+
             for (var i = 0; i < array.Length; i++)
             {
                 copy.SetValue(CopyValue(array.GetValue(i), seen), i);
@@ -59,7 +60,7 @@ internal static class ModelSnapshot
 
         if (value is IDictionary dictionary)
         {
-            var copy = (IDictionary)Activator.CreateInstance(type)!;
+            var copy = (IDictionary) Activator.CreateInstance(type)!;
             seen[value] = copy;
 
             foreach (DictionaryEntry item in dictionary)
@@ -72,8 +73,9 @@ internal static class ModelSnapshot
 
         if (value is IList list)
         {
-            var copy = (IList)Activator.CreateInstance(type)!;
+            var copy = (IList) Activator.CreateInstance(type)!;
             seen[value] = copy;
+
             foreach (var item in list)
             {
                 copy.Add(CopyValue(item, seen));

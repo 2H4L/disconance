@@ -55,7 +55,7 @@ internal sealed class InteractionEndpoint
         {
             while (true)
             {
-                var readSize = (int)Math.Min(buffer.Length, _maxRequestBodySize - body.Length + 1);
+                var readSize = (int) Math.Min(buffer.Length, _maxRequestBodySize - body.Length + 1);
                 var read = await request.Body.ReadAsync(buffer.AsMemory(0, readSize), cancellationToken);
 
                 if (read == 0)
@@ -76,7 +76,7 @@ internal sealed class InteractionEndpoint
             ArrayPool<byte>.Shared.Return(buffer);
         }
 
-        var bodyBytes = body.GetBuffer().AsMemory(0, (int)body.Length);
+        var bodyBytes = body.GetBuffer().AsMemory(0, (int) body.Length);
         var timestampBytes = Encoding.UTF8.GetBytes(timestamp);
         var signedBytes = new byte[timestampBytes.Length + bodyBytes.Length];
         timestampBytes.CopyTo(signedBytes, 0);
@@ -101,7 +101,7 @@ internal sealed class InteractionEndpoint
                 return Results.BadRequest();
             }
 
-            if (kind == (int)InteractionType.Ping)
+            if (kind == (int) InteractionType.Ping)
             {
                 return Json(new InteractionResponse { Type = InteractionCallbackType.Pong });
             }

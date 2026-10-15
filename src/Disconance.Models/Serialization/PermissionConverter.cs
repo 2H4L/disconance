@@ -12,7 +12,7 @@ internal sealed class PermissionConverter : JsonConverter<PermissionFlags>
         if (reader.TokenType == JsonTokenType.String && ulong.TryParse(reader.GetString(), NumberStyles.None,
                 CultureInfo.InvariantCulture, out var value))
         {
-            return (PermissionFlags)value;
+            return (PermissionFlags) value;
         }
 
         throw new JsonException("Expected decimal-string permissions.");
@@ -20,6 +20,6 @@ internal sealed class PermissionConverter : JsonConverter<PermissionFlags>
 
     public override void Write(Utf8JsonWriter writer, PermissionFlags value, JsonSerializerOptions options)
     {
-        writer.WriteStringValue(((ulong)value).ToString(CultureInfo.InvariantCulture));
+        writer.WriteStringValue(((ulong) value).ToString(CultureInfo.InvariantCulture));
     }
 }

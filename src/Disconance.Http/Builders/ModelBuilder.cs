@@ -43,7 +43,7 @@ public abstract class ModelBuilder<T, TSelf> : IModelBuilder<T> where T : class 
     {
         typeof(T).GetProperty(property)!.SetValue(_value, value);
         _assigned.Add(property);
-        return (TSelf)this;
+        return (TSelf) this;
     }
 
     /// <summary>
@@ -57,13 +57,13 @@ public abstract class ModelBuilder<T, TSelf> : IModelBuilder<T> where T : class 
 
         if (member.PropertyType == typeof(Optional<List<TItem>>))
         {
-            var optional = (Optional<List<TItem>>)current!;
+            var optional = (Optional<List<TItem>>) current!;
             list = optional.HasValue ? optional.Value ?? [] : [];
             list.Add(value);
             return Set(property, new Optional<List<TItem>>(list));
         }
 
-        list = (List<TItem>?)current ?? [];
+        list = (List<TItem>?) current ?? [];
         list.Add(value);
         return Set(property, list);
     }

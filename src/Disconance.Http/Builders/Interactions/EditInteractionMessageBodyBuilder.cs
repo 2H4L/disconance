@@ -52,7 +52,7 @@ public sealed class
     /// </summary>
     public EditInteractionMessageBodyBuilder ClearPoll()
     {
-        return WithPoll((PollDefinition?)null);
+        return WithPoll((PollDefinition?) null);
     }
 
     /// <summary>
@@ -135,7 +135,7 @@ public sealed class
     /// </summary>
     public EditInteractionMessageBodyBuilder ClearAllowedMentions()
     {
-        return WithAllowedMentions((AllowedMentions?)null);
+        return WithAllowedMentions((AllowedMentions?) null);
     }
 
     /// <summary>

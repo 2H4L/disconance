@@ -123,7 +123,7 @@ public sealed class EditMessageBodyBuilder : ModelBuilder<EditMessageBody, EditM
     /// </summary>
     public EditMessageBodyBuilder ClearAllowedMentions()
     {
-        return WithAllowedMentions((AllowedMentions?)null);
+        return WithAllowedMentions((AllowedMentions?) null);
     }
 
     /// <summary>

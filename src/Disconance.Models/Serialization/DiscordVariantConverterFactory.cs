@@ -22,7 +22,7 @@ internal sealed class DiscordVariantConverterFactory : JsonConverterFactory
 
     public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
     {
-        return (JsonConverter)Activator.CreateInstance(typeof(VariantConverter<>).MakeGenericType(type))!;
+        return (JsonConverter) Activator.CreateInstance(typeof(VariantConverter<>).MakeGenericType(type))!;
     }
 
     private static Type Resolve(Type type, int kind)
@@ -31,26 +31,26 @@ internal sealed class DiscordVariantConverterFactory : JsonConverterFactory
         {
             return kind switch
             {
-                (int)ComponentType.ActionRow => typeof(ActionRow),
-                (int)ComponentType.Button => typeof(Button),
-                (int)ComponentType.ChannelSelect => typeof(ChannelSelect),
-                (int)ComponentType.Checkbox => typeof(Checkbox),
-                (int)ComponentType.CheckboxGroup => typeof(CheckboxGroup),
-                (int)ComponentType.Container => typeof(Container),
-                (int)ComponentType.File => typeof(FileComponent),
-                (int)ComponentType.FileUpload => typeof(FileUpload),
-                (int)ComponentType.Label => typeof(LabelComponent),
-                (int)ComponentType.MediaGallery => typeof(MediaGallery),
-                (int)ComponentType.MentionableSelect => typeof(MentionableSelect),
-                (int)ComponentType.RadioGroup => typeof(RadioGroup),
-                (int)ComponentType.RoleSelect => typeof(RoleSelect),
-                (int)ComponentType.Section => typeof(Section),
-                (int)ComponentType.Separator => typeof(Separator),
-                (int)ComponentType.StringSelect => typeof(StringSelect),
-                (int)ComponentType.TextDisplay => typeof(TextDisplay),
-                (int)ComponentType.TextInput => typeof(TextInput),
-                (int)ComponentType.Thumbnail => typeof(Thumbnail),
-                (int)ComponentType.UserSelect => typeof(UserSelect),
+                (int) ComponentType.ActionRow => typeof(ActionRow),
+                (int) ComponentType.Button => typeof(Button),
+                (int) ComponentType.ChannelSelect => typeof(ChannelSelect),
+                (int) ComponentType.Checkbox => typeof(Checkbox),
+                (int) ComponentType.CheckboxGroup => typeof(CheckboxGroup),
+                (int) ComponentType.Container => typeof(Container),
+                (int) ComponentType.File => typeof(FileComponent),
+                (int) ComponentType.FileUpload => typeof(FileUpload),
+                (int) ComponentType.Label => typeof(LabelComponent),
+                (int) ComponentType.MediaGallery => typeof(MediaGallery),
+                (int) ComponentType.MentionableSelect => typeof(MentionableSelect),
+                (int) ComponentType.RadioGroup => typeof(RadioGroup),
+                (int) ComponentType.RoleSelect => typeof(RoleSelect),
+                (int) ComponentType.Section => typeof(Section),
+                (int) ComponentType.Separator => typeof(Separator),
+                (int) ComponentType.StringSelect => typeof(StringSelect),
+                (int) ComponentType.TextDisplay => typeof(TextDisplay),
+                (int) ComponentType.TextInput => typeof(TextInput),
+                (int) ComponentType.Thumbnail => typeof(Thumbnail),
+                (int) ComponentType.UserSelect => typeof(UserSelect),
                 _ => throw new JsonException($"Unsupported Component discriminator: {kind}.")
             };
         }
@@ -59,19 +59,19 @@ internal sealed class DiscordVariantConverterFactory : JsonConverterFactory
         {
             return kind switch
             {
-                (int)ComponentType.ActionRow => typeof(ActionRowInteractionResponse),
-                (int)ComponentType.ChannelSelect => typeof(ChannelSelectInteractionResponse),
-                (int)ComponentType.CheckboxGroup => typeof(CheckboxGroupInteractionResponse),
-                (int)ComponentType.Checkbox => typeof(CheckboxInteractionResponse),
-                (int)ComponentType.FileUpload => typeof(FileUploadInteractionResponse),
-                (int)ComponentType.Label => typeof(LabelInteractionResponse),
-                (int)ComponentType.MentionableSelect => typeof(MentionableSelectInteractionResponse),
-                (int)ComponentType.RadioGroup => typeof(RadioGroupInteractionResponse),
-                (int)ComponentType.RoleSelect => typeof(RoleSelectInteractionResponse),
-                (int)ComponentType.StringSelect => typeof(StringSelectInteractionResponse),
-                (int)ComponentType.TextDisplay => typeof(TextDisplayInteractionResponse),
-                (int)ComponentType.TextInput => typeof(TextInputInteractionResponse),
-                (int)ComponentType.UserSelect => typeof(UserSelectInteractionResponse),
+                (int) ComponentType.ActionRow => typeof(ActionRowInteractionResponse),
+                (int) ComponentType.ChannelSelect => typeof(ChannelSelectInteractionResponse),
+                (int) ComponentType.CheckboxGroup => typeof(CheckboxGroupInteractionResponse),
+                (int) ComponentType.Checkbox => typeof(CheckboxInteractionResponse),
+                (int) ComponentType.FileUpload => typeof(FileUploadInteractionResponse),
+                (int) ComponentType.Label => typeof(LabelInteractionResponse),
+                (int) ComponentType.MentionableSelect => typeof(MentionableSelectInteractionResponse),
+                (int) ComponentType.RadioGroup => typeof(RadioGroupInteractionResponse),
+                (int) ComponentType.RoleSelect => typeof(RoleSelectInteractionResponse),
+                (int) ComponentType.StringSelect => typeof(StringSelectInteractionResponse),
+                (int) ComponentType.TextDisplay => typeof(TextDisplayInteractionResponse),
+                (int) ComponentType.TextInput => typeof(TextInputInteractionResponse),
+                (int) ComponentType.UserSelect => typeof(UserSelectInteractionResponse),
                 _ => throw new JsonException($"Unsupported ComponentInteractionResponse discriminator: {kind}.")
             };
         }
@@ -80,9 +80,9 @@ internal sealed class DiscordVariantConverterFactory : JsonConverterFactory
         {
             return kind switch
             {
-                (int)DynamicFieldType.Media => typeof(DynamicMediaField),
-                (int)DynamicFieldType.Number => typeof(DynamicNumberField),
-                (int)DynamicFieldType.String => typeof(DynamicStringField),
+                (int) DynamicFieldType.Media => typeof(DynamicMediaField),
+                (int) DynamicFieldType.Number => typeof(DynamicNumberField),
+                (int) DynamicFieldType.String => typeof(DynamicStringField),
                 _ => throw new JsonException($"Unsupported DynamicField discriminator: {kind}.")
             };
         }
@@ -91,9 +91,9 @@ internal sealed class DiscordVariantConverterFactory : JsonConverterFactory
         {
             return kind switch
             {
-                (int)InteractionType.ApplicationCommand => typeof(ApplicationCommandInteractionMetadata),
-                (int)InteractionType.MessageComponent => typeof(MessageComponentInteractionMetadata),
-                (int)InteractionType.ModalSubmit => typeof(ModalSubmitInteractionMetadata),
+                (int) InteractionType.ApplicationCommand => typeof(ApplicationCommandInteractionMetadata),
+                (int) InteractionType.MessageComponent => typeof(MessageComponentInteractionMetadata),
+                (int) InteractionType.ModalSubmit => typeof(ModalSubmitInteractionMetadata),
                 _ => throw new JsonException($"Unsupported MessageInteractionMetadata discriminator: {kind}.")
             };
         }

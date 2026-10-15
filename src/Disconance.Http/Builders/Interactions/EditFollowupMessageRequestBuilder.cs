@@ -84,7 +84,7 @@ public sealed class EditFollowupMessageRequestBuilder : IRequestBuilder<EditFoll
     /// </summary>
     public EditFollowupMessageRequestBuilder ClearPoll()
     {
-        return WithPoll((PollDefinition?)null);
+        return WithPoll((PollDefinition?) null);
     }
 
     /// <summary>

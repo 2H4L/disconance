@@ -14,7 +14,7 @@ internal sealed class InteractionEnvelopeConverterFactory : JsonConverterFactory
 
     public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
     {
-        return (JsonConverter)Activator.CreateInstance(typeof(EnvelopeConverter<>).MakeGenericType(type))!;
+        return (JsonConverter) Activator.CreateInstance(typeof(EnvelopeConverter<>).MakeGenericType(type))!;
     }
 
     private sealed class EnvelopeConverter<T> : JsonConverter<T>
@@ -57,7 +57,7 @@ internal sealed class InteractionEnvelopeConverterFactory : JsonConverterFactory
                     _ => throw new JsonException($"Unsupported interaction data discriminator: {kind}.")
                 };
 
-                interaction.Data = (InteractionData)data.Deserialize(dataType, options)!;
+                interaction.Data = (InteractionData) data.Deserialize(dataType, options)!;
             }
             else if (value is InteractionResponse response)
             {
@@ -69,7 +69,7 @@ internal sealed class InteractionEnvelopeConverterFactory : JsonConverterFactory
                     _ => throw new JsonException($"Unsupported callback data discriminator: {kind}.")
                 };
 
-                response.Data = (InteractionResponseData)data.Deserialize(dataType, options)!;
+                response.Data = (InteractionResponseData) data.Deserialize(dataType, options)!;
             }
 
             return value;

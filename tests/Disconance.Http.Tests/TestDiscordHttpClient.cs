@@ -301,7 +301,7 @@ public class TestDiscordHttpClient
         {
             calls++;
 
-            return Task.FromResult(new HttpResponseMessage((HttpStatusCode)status)
+            return Task.FromResult(new HttpResponseMessage((HttpStatusCode) status)
                 { Content = new StringContent($"{{\"code\":{code}}}") });
         });
 
@@ -351,7 +351,7 @@ public class TestDiscordHttpClient
         using var handler = new CallbackHandler(_ =>
         {
             calls++;
-            return Task.FromResult(new HttpResponseMessage((HttpStatusCode)status));
+            return Task.FromResult(new HttpResponseMessage((HttpStatusCode) status));
         });
 
         using var sut = new DiscordHttpClient(new DiscordHttpOptions { Token = "secret" }, handler);

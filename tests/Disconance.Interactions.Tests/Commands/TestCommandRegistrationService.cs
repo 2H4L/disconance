@@ -111,7 +111,7 @@ public class TestCommandRegistrationService
         public Task<DiscordResponse<T>> SendAsync<T>(IDiscordRequest<T> request,
             CancellationToken cancellationToken = default)
         {
-            Requests.Add(Assert.IsType<IDiscordRequest<ApplicationCommand>>(request, exactMatch: false));
+            Requests.Add(Assert.IsType<IDiscordRequest<ApplicationCommand>>(request, false));
             Cancellation = cancellationToken;
 
             return Task.FromResult(new DiscordResponse<T>

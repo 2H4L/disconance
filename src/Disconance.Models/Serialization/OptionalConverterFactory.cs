@@ -12,7 +12,7 @@ internal sealed class OptionalConverterFactory : JsonConverterFactory
 
     public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
     {
-        return (JsonConverter)Activator.CreateInstance(
+        return (JsonConverter) Activator.CreateInstance(
             typeof(OptionalConverter<>).MakeGenericType(type.GetGenericArguments()))!;
     }
 

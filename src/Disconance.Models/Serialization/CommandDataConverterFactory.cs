@@ -14,7 +14,7 @@ internal sealed class CommandDataConverterFactory : JsonConverterFactory
 
     public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
     {
-        return (JsonConverter)Activator.CreateInstance(typeof(CommandConverter<>).MakeGenericType(type))!;
+        return (JsonConverter) Activator.CreateInstance(typeof(CommandConverter<>).MakeGenericType(type))!;
     }
 
     private static void Normalize(ApplicationCommandOption option)

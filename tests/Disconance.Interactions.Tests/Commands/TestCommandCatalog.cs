@@ -29,7 +29,8 @@ public class TestCommandCatalog
     [InlineData("""{"id":"1","name":"admin","type":1,"options":[null]}""")]
     [InlineData("""{"id":"1","name":"admin","type":1,"options":[{"name":null,"type":1}]}""")]
     [InlineData("""{"id":"1","name":"admin","type":1,"options":[{"name":"status","type":1,"value":"unexpected"}]}""")]
-    [InlineData("""{"id":"1","name":"admin","type":1,"options":[{"name":"status","type":1,"options":[{"name":"extra","type":1}]}]}""")]
+    [InlineData(
+        """{"id":"1","name":"admin","type":1,"options":[{"name":"status","type":1,"options":[{"name":"extra","type":1}]}]}""")]
     public void Find_MalformedCommandData_ReturnsNoMatch(string json)
     {
         var data = JsonSerializer.Deserialize<ApplicationCommandData>(json, DiscordJson.CreateOptions())!;

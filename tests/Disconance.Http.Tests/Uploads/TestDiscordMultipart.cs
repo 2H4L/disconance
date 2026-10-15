@@ -25,7 +25,7 @@ public class TestDiscordMultipart
 
         var sut = DiscordMultipart.CreateFactory(payload, [file]);
 
-        using (var first = (MultipartFormDataContent)sut())
+        using (var first = (MultipartFormDataContent) sut())
         {
             var parts = first.ToArray();
             using var json = JsonDocument.Parse(await parts[0].ReadAsStringAsync());

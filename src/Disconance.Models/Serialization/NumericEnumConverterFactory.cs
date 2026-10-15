@@ -13,7 +13,7 @@ internal sealed class NumericEnumConverterFactory : JsonConverterFactory
 
     public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
     {
-        return (JsonConverter)Activator.CreateInstance(typeof(EnumConverter<>).MakeGenericType(type))!;
+        return (JsonConverter) Activator.CreateInstance(typeof(EnumConverter<>).MakeGenericType(type))!;
     }
 
     private sealed class EnumConverter<T> : JsonConverter<T> where T : struct, Enum
@@ -27,14 +27,14 @@ internal sealed class NumericEnumConverterFactory : JsonConverterFactory
                 throw new JsonException("Expected a numeric enum.");
             }
 
-            return Unsigned ? (T)Enum.ToObject(type, reader.GetUInt64()) : FromSigned(reader.GetInt64());
+            return Unsigned ? (T) Enum.ToObject(type, reader.GetUInt64()) : FromSigned(reader.GetInt64());
         }
 
         private static T FromSigned(long value)
         {
             try
             {
-                return (T)Enum.ToObject(typeof(T),
+                return (T) Enum.ToObject(typeof(T),
                     Convert.ChangeType(value, Enum.GetUnderlyingType(typeof(T)), CultureInfo.InvariantCulture));
             }
             catch (OverflowException exception)
@@ -60,7 +60,7 @@ internal sealed class NumericEnumConverterFactory : JsonConverterFactory
             if (Unsigned && ulong.TryParse(reader.GetString(), NumberStyles.None, CultureInfo.InvariantCulture,
                     out var unsigned))
             {
-                return (T)Enum.ToObject(type, unsigned);
+                return (T) Enum.ToObject(type, unsigned);
             }
 
             if (!Unsigned && long.TryParse(reader.GetString(), NumberStyles.AllowLeadingSign,

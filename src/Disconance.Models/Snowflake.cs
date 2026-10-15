@@ -19,7 +19,7 @@ public readonly record struct Snowflake(ulong Value) : IComparable<Snowflake>
     /// <summary>
     ///     The timestamp encoded in the identifier, relative to Discord's 2015 epoch.
     /// </summary>
-    public DateTimeOffset Timestamp => DateTimeOffset.FromUnixTimeMilliseconds((long)(Value >> 22) + 1420070400000L);
+    public DateTimeOffset Timestamp => DateTimeOffset.FromUnixTimeMilliseconds((long) (Value >> 22) + 1420070400000L);
 
     /// <summary>
     ///     Compares identifiers numerically.

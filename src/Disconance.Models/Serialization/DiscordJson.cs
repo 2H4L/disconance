@@ -25,7 +25,7 @@ public static class DiscordJson
                 if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Optional<>))
                 {
                     var present = type.GetProperty(nameof(Optional<int>.HasValue))!;
-                    property.ShouldSerialize = (_, value) => value is not null && (bool)present.GetValue(value)!;
+                    property.ShouldSerialize = (_, value) => value is not null && (bool) present.GetValue(value)!;
                 }
             }
         });
