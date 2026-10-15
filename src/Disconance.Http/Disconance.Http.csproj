@@ -9,11 +9,13 @@
         <IsPackable>true</IsPackable>
         <PackageId>Disconance.Http</PackageId>
         <Authors>2H4L Software</Authors>
+        <Copyright>Copyright (c) 2026 2H4L Software</Copyright>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageProjectUrl>https://github.com/2H4L/disconance</PackageProjectUrl>
         <RepositoryUrl>https://github.com/2H4L/disconance</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <Version>0.1.0-alpha.1</Version>
+        <Version>0.1.0-alpha.2</Version>
         <PackageTags>discord;http;disconance</PackageTags>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -24,5 +26,6 @@
         <InternalsVisibleTo Include="Disconance.Http.Tests"/>
         <ProjectReference Include="../Disconance.Models/Disconance.Models.csproj"/>
         <None Include="../../LICENSE" Pack="true" PackagePath="/"/>
+        <None Include="../../README.md" Link="README.md" Pack="true" PackagePath="/"/>
     </ItemGroup>
 </Project>
