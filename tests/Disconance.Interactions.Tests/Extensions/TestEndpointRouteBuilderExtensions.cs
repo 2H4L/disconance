@@ -1,4 +1,5 @@
 using System.Net;
+using System.Globalization;
 using System.Text;
 using System.Text.Json;
 using Disconance.Interactions.Extensions;
@@ -10,6 +11,7 @@ using Disconance.Models.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NSec.Cryptography;
@@ -38,10 +40,12 @@ public class TestEndpointRouteBuilderExtensions
         Assert.Equal(0, sut.Handler.Calls);
     }
 
-    [Fact]
-    public async Task MapDisconanceInteractions_SignedCommand_UsesDiscordJsonAndCustomHandler()
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task MapDisconanceInteractions_SignedCommand_UsesDiscordJsonAndCustomHandler(bool configuration)
     {
-        using var sut = new EndpointHost();
+        using var sut = new EndpointHost(configuration: configuration);
         using var request = sut.Sign(CommandBody);
 
         using var response = await sut.Client.SendAsync(request);
@@ -285,7 +289,7 @@ public class TestEndpointRouteBuilderExtensions
         private readonly Key _key = Key.Import(SignatureAlgorithm.Ed25519, new byte[32], KeyBlobFormat.RawPrivateKey);
 
         public EndpointHost(Action<IServiceCollection>? configure = null, int maxBodySize = 1024 * 1024,
-            bool customHandler = true)
+            bool customHandler = true, bool configuration = false)
         {
             _host = new HostBuilder().ConfigureWebHost(web => web.UseTestServer()
                 .ConfigureServices(services =>
@@ -297,11 +301,26 @@ public class TestEndpointRouteBuilderExtensions
                         services.AddSingleton<IInteractionHandler>(Handler);
                     }
 
-                    services.AddDisconanceInteractions(options =>
+                    if (configuration)
                     {
-                        options.PublicKey = Convert.ToHexString(_key.PublicKey.Export(KeyBlobFormat.RawPublicKey));
-                        options.MaxRequestBodySize = maxBodySize;
-                    });
+                        services.AddSingleton<IConfiguration>(_ => new ConfigurationBuilder()
+                            .AddInMemoryCollection(new Dictionary<string, string?>
+                            {
+                                ["Discord:PublicKey"] = Convert.ToHexString(
+                                    _key.PublicKey.Export(KeyBlobFormat.RawPublicKey)),
+                                ["Discord:MaxRequestBodySize"] = maxBodySize.ToString(CultureInfo.InvariantCulture)
+                            }).Build());
+
+                        services.AddDisconanceInteractions();
+                    }
+                    else
+                    {
+                        services.AddDisconanceInteractions(options =>
+                        {
+                            options.PublicKey = Convert.ToHexString(_key.PublicKey.Export(KeyBlobFormat.RawPublicKey));
+                            options.MaxRequestBodySize = maxBodySize;
+                        });
+                    }
 
                     configure?.Invoke(services);
                 })

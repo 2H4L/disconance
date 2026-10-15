@@ -1,10 +1,19 @@
+using Disconance.Models;
+
 namespace Disconance.Interactions;
 
 /// <summary>
-///     Configures the signed HTTP endpoint for one Discord application.
+///     Configures one Discord application and its signed HTTP endpoint.
 /// </summary>
 public sealed class DiscordInteractionOptions
 {
+    /// <summary>
+    ///     The application ID used by startup command registration when no explicit application ID is supplied.
+    ///     May be omitted when receiving interactions without publishing commands or when targets use explicit IDs.
+    /// </summary>
+    /// <seealso href="https://docs.discord.com/developers/resources/application#application-object-application-structure" />
+    public Snowflake ApplicationId { get; set; }
+
     /// <summary>
     ///     The application's 32-byte Ed25519 public key, encoded as 64 hexadecimal characters.
     /// </summary>

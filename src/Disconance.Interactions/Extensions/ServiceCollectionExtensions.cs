@@ -6,8 +6,12 @@ using Disconance.Interactions.Components;
 using Disconance.Interactions.Hosting;
 using Disconance.Interactions.Middleware;
 using Disconance.Interactions.Modals;
+using Disconance.Models;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 
 namespace Disconance.Interactions.Extensions;
 
@@ -27,6 +31,59 @@ public static class ServiceCollectionExtensions
     /// </param>
     extension(IServiceCollection services)
     {
+        /// <summary>
+        ///     Configures interactions and HTTP from the application's IConfiguration service.
+        ///     The default section is Discord. Discord JSON serialization is configured internally.
+        /// </summary>
+        /// <remarks>
+        ///     Reads ApplicationId, PublicKey, BotToken, and MaxRequestBodySize from the selected section.
+        ///     Optional HTTP transport settings belong in its Http child section. ApplicationId accepts unsigned
+        ///     decimal strings across the full 64-bit range. Startup command registration remains explicit.
+        /// </remarks>
+        /// <param name="configurationSection">
+        ///     The configuration section containing settings from appsettings, user secrets, or other providers.
+        /// </param>
+        /// <returns>
+        ///     The service collection for additional interaction setup and registration targets.
+        /// </returns>
+        public IServiceCollection AddDisconanceInteractions(string configurationSection = "Discord")
+        {
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentException.ThrowIfNullOrWhiteSpace(configurationSection);
+            services.AddDisconanceInteractions(_ => { });
+
+            services.AddOptions<DiscordInteractionOptions>().Configure<IConfiguration>((options, configuration) =>
+            {
+                var section = configuration.GetRequiredSection(configurationSection);
+                var applicationId = section[nameof(DiscordInteractionOptions.ApplicationId)];
+
+                if (applicationId is not null)
+                {
+                    if (!Snowflake.TryParse(applicationId, out var parsed) || parsed.Value == 0)
+                    {
+                        throw new OptionsValidationException(Options.DefaultName, typeof(DiscordInteractionOptions),
+                            [$"{section.Path}:ApplicationId must be a nonzero unsigned decimal snowflake."]);
+                    }
+
+                    options.ApplicationId = parsed;
+                }
+
+                options.PublicKey = section[nameof(DiscordInteractionOptions.PublicKey)] ?? options.PublicKey;
+
+                options.MaxRequestBodySize = section.GetValue<int?>(nameof(DiscordInteractionOptions.MaxRequestBodySize))
+                                             ?? options.MaxRequestBodySize;
+            });
+
+            services.AddOptions<DiscordHttpOptions>().Configure<IConfiguration>((options, configuration) =>
+            {
+                var section = configuration.GetRequiredSection(configurationSection);
+                section.GetSection("Http").Bind(options);
+                options.Token = section["BotToken"] ?? options.Token;
+            });
+
+            return services;
+        }
+
         /// <summary>
         ///     Adds HTTP services, the signed endpoint, and dispatch services, preserving existing senders and handlers.
         /// </summary>
@@ -58,6 +115,111 @@ public static class ServiceCollectionExtensions
             services.TryAddScoped<CommandCatalog>();
             services.TryAddScoped<IInteractionHandler, DefaultInteractionHandler>();
             services.TryAddScoped<ICommandRegistrationService, CommandRegistrationService>();
+            return services;
+        }
+
+        /// <summary>
+        ///     Publishes discovered command definitions globally during host startup using the configured ApplicationId.
+        ///     Requires AddDisconanceInteractions. Registration failures fail startup.
+        /// </summary>
+        /// <returns>
+        ///     The service collection for additional interaction setup and registration targets.
+        /// </returns>
+        public IServiceCollection RegisterGlobalCommandsOnStartup()
+        {
+            ArgumentNullException.ThrowIfNull(services);
+            services.AddSingleton(new CommandRegistrationTarget(null, null));
+
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHostedService, CommandRegistrationHostedService>());
+
+            return services;
+        }
+
+        /// <summary>
+        ///     Publishes discovered command definitions globally during host startup.
+        ///     Requires AddDisconanceInteractions. Repeated targets are published once per startup.
+        /// </summary>
+        /// <remarks>
+        ///     Registration uses the configured ICommandRegistrationService within an internally managed scope.
+        ///     Commands are created or updated without deleting other commands. Registration failures fail startup.
+        /// </remarks>
+        /// <param name="applicationId">
+        ///     The Discord application receiving the command definitions.
+        /// </param>
+        /// <returns>
+        ///     The service collection for additional interaction setup and registration targets.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     The application ID is zero.
+        /// </exception>
+        public IServiceCollection RegisterGlobalCommandsOnStartup(Snowflake applicationId)
+        {
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentOutOfRangeException.ThrowIfZero(applicationId.Value);
+            services.AddSingleton(new CommandRegistrationTarget(applicationId, null));
+
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHostedService, CommandRegistrationHostedService>());
+
+            return services;
+        }
+
+        /// <summary>
+        ///     Publishes discovered command definitions to a guild during host startup using the configured ApplicationId.
+        ///     Requires AddDisconanceInteractions. Repeat for additional guilds or combine with global registration.
+        /// </summary>
+        /// <param name="guildId">
+        ///     The guild receiving this registration. Other targets are configured independently.
+        /// </param>
+        /// <returns>
+        ///     The service collection for additional interaction setup and registration targets.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     The guild ID is zero.
+        /// </exception>
+        public IServiceCollection RegisterGuildCommandsOnStartup(Snowflake guildId)
+        {
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentOutOfRangeException.ThrowIfZero(guildId.Value);
+            services.AddSingleton(new CommandRegistrationTarget(null, guildId));
+
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHostedService, CommandRegistrationHostedService>());
+
+            return services;
+        }
+
+        /// <summary>
+        ///     Publishes discovered command definitions to a guild during host startup.
+        ///     Requires AddDisconanceInteractions. Repeat for additional guilds or combine with global registration.
+        /// </summary>
+        /// <remarks>
+        ///     Repeated targets are published once per startup using an internally managed scope.
+        ///     Commands are created or updated without deleting other commands. Registration failures fail startup.
+        /// </remarks>
+        /// <param name="applicationId">
+        ///     The Discord application receiving the command definitions.
+        /// </param>
+        /// <param name="guildId">
+        ///     The guild receiving this registration. Other targets are configured independently.
+        /// </param>
+        /// <returns>
+        ///     The service collection for additional interaction setup and registration targets.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        ///     The application ID or guild ID is zero.
+        /// </exception>
+        public IServiceCollection RegisterGuildCommandsOnStartup(Snowflake applicationId, Snowflake guildId)
+        {
+            ArgumentNullException.ThrowIfNull(services);
+            ArgumentOutOfRangeException.ThrowIfZero(applicationId.Value);
+            ArgumentOutOfRangeException.ThrowIfZero(guildId.Value);
+            services.AddSingleton(new CommandRegistrationTarget(applicationId, guildId));
+
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IHostedService, CommandRegistrationHostedService>());
+
             return services;
         }
 
